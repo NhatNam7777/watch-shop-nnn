@@ -1,10 +1,8 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:nnn_watch_shop/constants.dart';
-import 'package:nnn_watch_shop/ui/homebody-page.dart';
-import 'package:nnn_watch_shop/ui/noti-page.dart';
-import 'package:nnn_watch_shop/ui/user-page.dart';
+import 'package:nnn_watch_shop/ui/home_body_page.dart';
+import 'package:nnn_watch_shop/ui/noti_page.dart';
+import 'package:nnn_watch_shop/ui/user_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,7 +12,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Widget> _pages = [HomeBodyPage(), NotiPage(), UserPage()];
+  final List<Widget> _pages = const [HomeBodyPage(), NotiPage(), UserPage()];
   int _selectedItem = 0;
   void _onItemTapped(int index) {
     setState(() {

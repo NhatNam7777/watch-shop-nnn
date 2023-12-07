@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:nnn_watch_shop/ui/home-page.dart';
+import 'package:nnn_watch_shop/ui/home_page.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

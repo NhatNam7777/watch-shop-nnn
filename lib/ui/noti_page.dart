@@ -10,7 +10,7 @@ class NotiPage extends StatefulWidget {
 class _NotiPageState extends State<NotiPage> {
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text('hello noti'),
     );
   }

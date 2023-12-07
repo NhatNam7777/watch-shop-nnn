@@ -68,9 +68,10 @@ class _HomeBodyPageState extends State<HomeBodyPage> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
+            //Todo: Create a search by hand
             SearchAnchor(
                 builder: (BuildContext context, SearchController controller) {
               return SearchBar(
@@ -80,7 +81,7 @@ class _HomeBodyPageState extends State<HomeBodyPage> {
 //               },
                 hintStyle: MaterialStateProperty.resolveWith<TextStyle?>(
                   (Set<MaterialState> state) {
-                    return TextStyle(
+                    return const TextStyle(
                       color: Colors.grey,
                       fontStyle: FontStyle.italic,
                     );
