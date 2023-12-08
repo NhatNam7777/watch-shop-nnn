@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../constants.dart';
 
 class HomeBodyPage extends StatefulWidget {
@@ -10,6 +11,13 @@ class HomeBodyPage extends StatefulWidget {
 }
 
 class _HomeBodyPageState extends State<HomeBodyPage> {
+  final List<String> imgList = [
+    'lib/assets/images/slider-banner-home-1.jpg',
+    'lib/assets/images/slider-banner-home-2.png',
+    'lib/assets/images/slider-banner-home-3.jpg',
+  ];
+  CarouselController buttonCarouselController = CarouselController();
+  int activeIndex = 0;
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -19,6 +27,7 @@ class _HomeBodyPageState extends State<HomeBodyPage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              //header
               Container(
                 color: kmainColor,
                 height: width * 0.16,
@@ -28,8 +37,8 @@ class _HomeBodyPageState extends State<HomeBodyPage> {
                     Padding(
                       padding: const EdgeInsets.only(left: 15),
                       child: Image.asset(
-                        'lib/assets/icons/menu-home.png',
-                        width: 30,
+                        'lib/assets/icons/option.png',
+                        width: 28,
                         color: Colors.white,
                         // fit: BoxFit.fitWidth,
                       ),
@@ -42,28 +51,27 @@ class _HomeBodyPageState extends State<HomeBodyPage> {
                           width: 35,
                           color: Colors.white,
                         ),
-                        // Text(
-                        //   '--NNN',
-                        //   style: const TextStyle(
-                        //     fontSize: 15,
-                        //     color: Colors.white,
-                        //   ),
-                        // ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              ' Nam Store',
+                              style: const TextStyle(
+                                fontSize: 15,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
-                    Row(
-                      children: [
-                        Image.asset(
-                          'lib/assets/icons/shopping-cart.png',
-                          width: 35,
-                          color: Colors.white,
-                        ),
-                        Image.asset(
-                          'lib/assets/icons/message.png',
-                          width: 35,
-                          color: Colors.white,
-                        ),
-                      ],
+                    Padding(
+                      padding: const EdgeInsets.only(right: 15),
+                      child: Image.asset(
+                        'lib/assets/icons/shopping-cart.png',
+                        width: 28,
+                        color: Colors.white,
+                      ),
                     )
                   ],
                 ),
@@ -115,6 +123,71 @@ class _HomeBodyPageState extends State<HomeBodyPage> {
               const SizedBox(
                 height: 20,
               ),
+              CarouselSlider(
+                carouselController: buttonCarouselController,
+                options: CarouselOptions(
+                  height: width * 0.5,
+                  aspectRatio: 16 / 9,
+                  viewportFraction: 1,
+                  initialPage: 1,
+                  enableInfiniteScroll: false,
+                  // autoPlay: true,
+                  // autoPlayInterval: Duration(seconds: 4),
+                  // autoPlayAnimationDuration: Duration(milliseconds: 800),
+                  // autoPlayCurve: Curves.fastOutSlowIn,
+                  // enlargeCenterPage: false,
+                  // enlargeFactor: 0.3,
+                  onPageChanged: (index, reason) {
+                    setState(() {
+                      activeIndex = index;
+                    });
+                  },
+                  scrollDirection: Axis.horizontal,
+                ),
+                items: imgList.map((e) {
+                  return Builder(
+                    builder: (BuildContext context) {
+                      return Container(
+                        width: MediaQuery.of(context).size.width,
+                        // margin: EdgeInsets.symmetric(horizontal: 10),
+                        decoration: BoxDecoration(color: Colors.amber),
+                        child: Image.asset(
+                          e,
+                          fit: BoxFit.cover,
+                        ),
+                      );
+                    },
+                  );
+                }).toList(),
+              ),
+              //indicator
+              Padding(
+                padding: const EdgeInsets.only(top: 10, bottom: 30),
+                child: AnimatedSmoothIndicator(
+                  activeIndex: activeIndex,
+                  count: imgList.length,
+                  onDotClicked: (index) {
+                    // index = activeIndex;
+                    activeIndex = index;
+                  },
+                  // effect: ScaleEffect(
+                  //   scale: 1.0,
+                  //   dotColor: Colors.grey.shade400,
+                  //   activeDotColor: Colors.brown,
+                  //   strokeWidth: 2,
+                  //   // fixedCenter: true,
+                  //   dotHeight: 15,
+                  //   dotWidth: 15,
+                  //   paintStyle: PaintingStyle.fill,
+                  // ),
+                  effect: WormEffect(
+                    type: WormType.normal,
+                    dotColor: Colors.grey.shade400,
+                    activeDotColor: Colors.brown,
+                  ),
+                ),
+              ),
+              //male and female
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -123,9 +196,9 @@ class _HomeBodyPageState extends State<HomeBodyPage> {
                       left: 10,
                     ),
                     width: width * 0.45,
-                    height: width * 0.7,
+                    height: width * 0.55,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(15),
                       image: const DecorationImage(
                         image: AssetImage('lib/assets/images/male-watch.jpg'),
                         fit: BoxFit.cover,
@@ -146,13 +219,13 @@ class _HomeBodyPageState extends State<HomeBodyPage> {
                   //   width: 10,
                   // ),
                   Container(
-                    height: width * 0.7,
+                    height: width * 0.55,
                     width: width * 0.45,
                     margin: const EdgeInsets.only(
                       right: 10,
                     ),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(15),
                       image: const DecorationImage(
                         image:
                             AssetImage('lib/assets/images/female-watch.jpeg'),
@@ -176,11 +249,12 @@ class _HomeBodyPageState extends State<HomeBodyPage> {
               SizedBox(
                 height: width * 0.1 - 20,
               ),
+              //couple
               Container(
                 width: width - 20,
-                height: width * 0.7,
+                height: width * 0.55,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(15),
                   image: const DecorationImage(
                     image: AssetImage('lib/assets/images/couple-watch.jpeg'),
                     fit: BoxFit.cover,
@@ -196,7 +270,43 @@ class _HomeBodyPageState extends State<HomeBodyPage> {
                     ),
                   ),
                 ),
-              )
+              ),
+              SizedBox(
+                height: width * 0.1 - 20,
+              ),
+              //bts male
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: ClipRRect(
+                  child: Image.asset('lib/assets/images/bs-male.jpg'),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+              ),
+              SizedBox(
+                height: width * 0.1 - 20,
+              ),
+              //bst female
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: ClipRRect(
+                  child: Image.asset('lib/assets/images/bs-female.jpg'),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+              ),
+              SizedBox(
+                height: width * 0.1 - 20,
+              ),
+              //bst couple
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: ClipRRect(
+                  child: Image.asset('lib/assets/images/new-watch-arrival.jpg'),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+              ),
+              const SizedBox(
+                height: 100,
+              ),
             ],
           ),
         ),
