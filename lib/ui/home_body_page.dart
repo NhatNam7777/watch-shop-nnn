@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../constants.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class HomeBodyPage extends StatefulWidget {
   const HomeBodyPage({super.key});
@@ -18,6 +19,7 @@ class _HomeBodyPageState extends State<HomeBodyPage> {
   ];
   CarouselController buttonCarouselController = CarouselController();
   int activeIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -51,12 +53,12 @@ class _HomeBodyPageState extends State<HomeBodyPage> {
                           width: 35,
                           color: Colors.white,
                         ),
-                        Column(
+                        const Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
                               ' Nam Store',
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 15,
                                 color: Colors.white,
                               ),
@@ -121,7 +123,7 @@ class _HomeBodyPageState extends State<HomeBodyPage> {
                 });
               }),
               const SizedBox(
-                height: 20,
+                height: 15,
               ),
               CarouselSlider(
                 carouselController: buttonCarouselController,
@@ -150,7 +152,7 @@ class _HomeBodyPageState extends State<HomeBodyPage> {
                       return Container(
                         width: MediaQuery.of(context).size.width,
                         // margin: EdgeInsets.symmetric(horizontal: 10),
-                        decoration: BoxDecoration(color: Colors.amber),
+                        decoration: const BoxDecoration(color: Colors.amber),
                         child: Image.asset(
                           e,
                           fit: BoxFit.cover,
@@ -160,34 +162,36 @@ class _HomeBodyPageState extends State<HomeBodyPage> {
                   );
                 }).toList(),
               ),
+              const SizedBox(
+                height: 10,
+              ),
               //indicator
-              Padding(
-                padding: const EdgeInsets.only(top: 10, bottom: 30),
-                child: AnimatedSmoothIndicator(
-                  activeIndex: activeIndex,
-                  count: imgList.length,
-                  onDotClicked: (index) {
-                    // index = activeIndex;
-                    activeIndex = index;
-                  },
-                  // effect: ScaleEffect(
-                  //   scale: 1.0,
-                  //   dotColor: Colors.grey.shade400,
-                  //   activeDotColor: Colors.brown,
-                  //   strokeWidth: 2,
-                  //   // fixedCenter: true,
-                  //   dotHeight: 15,
-                  //   dotWidth: 15,
-                  //   paintStyle: PaintingStyle.fill,
-                  // ),
-                  effect: WormEffect(
-                    type: WormType.normal,
-                    dotColor: Colors.grey.shade400,
-                    activeDotColor: Colors.brown,
-                  ),
+              AnimatedSmoothIndicator(
+                activeIndex: activeIndex,
+                count: imgList.length,
+                onDotClicked: (index) {
+                  // index = activeIndex;
+                  activeIndex = index;
+                },
+                // effect: ScaleEffect(
+                //   scale: 1.0,
+                //   dotColor: Colors.grey.shade400,
+                //   activeD otColor: Colors.brown,
+                //   strokeWidth: 2,
+                //   // fixedCenter: true,
+                //   dotHeight: 15,
+                //   dotWidth: 15,
+                //   paintStyle: PaintingStyle.fill,
+                // ),
+                effect: WormEffect(
+                  type: WormType.normal,
+                  dotColor: Colors.grey.shade400,
+                  activeDotColor: Colors.brown,
                 ),
               ),
-              //male and female
+              const SizedBox(
+                height: 40,
+              ), //male and female
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -207,7 +211,7 @@ class _HomeBodyPageState extends State<HomeBodyPage> {
                     child: const Align(
                       alignment: Alignment.bottomLeft,
                       child: Padding(
-                        padding: const EdgeInsets.all(10.0),
+                        padding: EdgeInsets.all(10.0),
                         child: Text(
                           'NAM',
                           style: kCateHomeText,
@@ -263,7 +267,7 @@ class _HomeBodyPageState extends State<HomeBodyPage> {
                 child: Align(
                   alignment: Alignment.bottomRight,
                   child: Padding(
-                    padding: EdgeInsets.all(15.0),
+                    padding: const EdgeInsets.all(15.0),
                     child: Text(
                       'CẶP ĐÔI',
                       style: kCateHomeText.copyWith(fontSize: 25),
@@ -271,46 +275,327 @@ class _HomeBodyPageState extends State<HomeBodyPage> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: width * 0.1 - 20,
+              const SizedBox(
+                height: 50,
               ),
               //bts male
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: ClipRRect(
-                  child: Image.asset('lib/assets/images/bs-male.jpg'),
                   borderRadius: BorderRadius.circular(15),
+                  child: Image.asset('lib/assets/images/bs-male.jpg'),
                 ),
               ),
-              SizedBox(
-                height: width * 0.1 - 20,
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: width * 0.1 - 20),
+                child: const Text(
+                  'BST ĐỒNG HỒ NAM HOT',
+                  style: kBSTText,
+                ),
               ),
               //bst female
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: ClipRRect(
-                  child: Image.asset('lib/assets/images/bs-female.jpg'),
                   borderRadius: BorderRadius.circular(15),
+                  child: Image.asset('lib/assets/images/bs-female.jpg'),
                 ),
               ),
-              SizedBox(
-                height: width * 0.1 - 20,
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: width * 0.1 - 20),
+                child: const Text(
+                  'BST ĐỒNG HỒ NỮ HOT',
+                  style: kBSTText,
+                ),
               ),
-              //bst couple
+              //new arrival
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: ClipRRect(
-                  child: Image.asset('lib/assets/images/new-watch-arrival.jpg'),
                   borderRadius: BorderRadius.circular(15),
+                  child: Image.asset('lib/assets/images/new-watch-arrival.jpg'),
                 ),
               ),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: width * 0.1 - 20),
+                child: const Text(
+                  'CÁC MẪU ĐỒNG HỒ MỚI VỀ',
+                  style: kBSTText,
+                ),
+              ),
+              const Divider(
+                height: 1,
+                color: Color(0xffbebebe),
+                indent: 50,
+                endIndent: 50,
+              ),
+              //top selling male
               const SizedBox(
-                height: 100,
+                height: 30,
+              ),
+              const Text(
+                'ĐỒNG HỒ NAM BÁN CHẠY',
+                style: ktopSellingText,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  ProductView(width: width),
+                  SizedBox(
+                    width: width * 0.1 - 20,
+                  ),
+                  ProductView(width: width),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  ProductView(width: width),
+                  SizedBox(
+                    width: width * 0.1 - 20,
+                  ),
+                  ProductView(width: width),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  ProductView(width: width),
+                  SizedBox(
+                    width: width * 0.1 - 20,
+                  ),
+                  ProductView(width: width),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  ProductView(width: width),
+                  SizedBox(
+                    width: width * 0.1 - 20,
+                  ),
+                  ProductView(width: width),
+                ],
+              ),
+              const SizedBox(
+                height: 50,
+              ),
+              // top selling female
+              const Text(
+                'ĐỒNG HỒ NỮ BÁN CHẠY',
+                style: ktopSellingText,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  ProductView(width: width),
+                  SizedBox(
+                    width: width * 0.1 - 20,
+                  ),
+                  ProductView(width: width),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  ProductView(width: width),
+                  SizedBox(
+                    width: width * 0.1 - 20,
+                  ),
+                  ProductView(width: width),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  ProductView(width: width),
+                  SizedBox(
+                    width: width * 0.1 - 20,
+                  ),
+                  ProductView(width: width),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  ProductView(width: width),
+                  SizedBox(
+                    width: width * 0.1 - 20,
+                  ),
+                  ProductView(width: width),
+                ],
+              ),
+              const SizedBox(
+                height: 50,
               ),
             ],
           ),
         ),
       ),
     );
+  }
+}
+
+class ProductView extends StatelessWidget {
+  const ProductView({
+    super.key,
+    required this.width,
+  });
+
+  final double width;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+        width: width * 0.45,
+        child: Column(
+          children: [
+            Image.asset(
+              'lib/assets/images/dong-ho-chinh-hang-TB8218-19-1875841603.jpg',
+              width: width * 0.45,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0, top: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Đồng hồ Tsar Bomba TB8218-19 Carbon',
+                    style: knameProduct,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    // crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '1.020.000',
+                        style: kdiscountedPrice,
+                      ),
+                      const SizedBox(
+                        width: 2,
+                      ),
+                      Text(
+                        'đ',
+                        style: ksmallUnitVND,
+                      )
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        '1.200.000',
+                        style: kregularPrice,
+                      ),
+                      const SizedBox(
+                        width: 2,
+                      ),
+                      Text(
+                        'đ',
+                        style: ksmallUnitVND.copyWith(
+                          color: Colors.grey,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 15,
+                      ),
+                      Container(
+                        padding: EdgeInsets.all(3),
+                        margin: EdgeInsets.only(bottom: 5),
+                        color: Color(0xffF9E9E2),
+                        child: Text(
+                          '-20%',
+                          style: TextStyle(
+                            color: Colors.red,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Row(
+                    children: [
+                      RatingBar.builder(
+                        itemSize: 20,
+                        initialRating: 3,
+                        minRating: 1,
+                        direction: Axis.horizontal,
+                        allowHalfRating: true,
+                        itemCount: 5,
+                        itemPadding: EdgeInsets.symmetric(horizontal: 0.0),
+                        itemBuilder: (context, _) => Icon(
+                          Icons.star,
+                          color: Colors.amber,
+                        ),
+                        onRatingUpdate: (rating) {
+                          print(rating);
+                        },
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        '49',
+                        style: knumOfRating,
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ));
   }
 }

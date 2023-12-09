@@ -11,7 +11,12 @@ class _MessPageState extends State<MessPage> {
   @override
   Widget build(BuildContext context) {
     return const Center(
-      child: Text('hello mess'),
+      child: Text(
+        'hello mess',
+        style: TextStyle(
+          color: Colors.blue,
+        ),
+      ),
     );
   }
 }
